@@ -2,6 +2,7 @@ import React from "react";
 import { NavBar } from "antd-mobile";
 import { Link, NavLink } from "react-router-dom";
 // import { Menu as MenuIcon } from "grommet-icons";
+import { ReactComponent as FeedbackIcon } from "assets/icons/mail.svg";
 import styled from "styled-components";
 // ICONS
 import SvgIcon from "./Icon/SvgIcon";
@@ -47,6 +48,11 @@ const DesktopMenu = styled.div`
 const NavLinks = styled.div`
   align-self: flex-end;
   padding-top: 2rem;
+  button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
   ul {
     list-style-type: none;
     display: flex;
@@ -88,7 +94,7 @@ const activeStyles = {
   fontWeight: "600",
   color: `${colors.royalBlue};`,
 };
-export default ({ onMenuClick, ...props }) => {
+export default ({ onMenuClick, onFeedbackIconClick, ...props }) => {
   return (
     <div className="header" {...props}>
       <StyledNavBar
@@ -127,25 +133,27 @@ export default ({ onMenuClick, ...props }) => {
                       </li>
                     </>
                   ) : (
-                    <>
-                      <li>
-                        <NavLink activeStyle={activeStyles} to="/auth/login">
-                          Login
+                      <>
+                        <li>
+                          <NavLink activeStyle={activeStyles} to="/auth/login">
+                            Login
                         </NavLink>
-                      </li>
-                      <li className="registerBtn">
-                        <NavLink className="registerLink" to="/auth/signup">
-                          Register
+                        </li>
+                        <li className="registerBtn">
+                          <NavLink className="registerLink" to="/auth/signup">
+                            Register
                         </NavLink>
-                      </li>
-                      <Link to="/feed">
-                        <SvgIcon
-                          src={envelope}
-                          style={{ marginLeft: "1.5rem" }}
-                        />
-                      </Link>
-                    </>
-                  )}
+                        </li>
+                      </>
+                    )}
+                  <li>
+                    <button onClick={() => onFeedbackIconClick()}>
+                      <SvgIcon
+                        src={envelope}
+                        style={{ marginLeft: "1rem" }}
+                      />
+                    </button>
+                  </li>
                 </ul>
               </NavLinks>
             </DesktopMenu>
